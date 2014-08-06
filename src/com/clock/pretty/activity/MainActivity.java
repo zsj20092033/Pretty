@@ -26,21 +26,7 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.main_activity);
 		run_bg = (ImageView) findViewById(R.id.run_bg);
 		
-		Log.i(TAG, run_bg.getLayoutParams().width+"");
-		
-		ani_left = new TranslateAnimation((MyApplication.SCREEN_WIDTH - run_bg.getLayoutParams().width)/2,0,0,0);
-		ani_right = new TranslateAnimation(0,(MyApplication.SCREEN_WIDTH - run_bg.getLayoutParams().width)/2,0,0);
-		ani_left.setInterpolator(new AccelerateDecelerateInterpolator());
-		ani_left.setDuration(60000);
-		ani_left.setFillAfter(true);
-		ani_left.setFillEnabled(true);
-		ani_left.setAnimationListener(listener);
-		ani_right.setInterpolator(new AccelerateDecelerateInterpolator());
-		ani_right.setDuration(60000);
-		ani_right.setFillAfter(true);
-		ani_right.setFillEnabled(true);
-		ani_right.setAnimationListener(listener);
-		run_bg.startAnimation(ani_left);
+		initAnimation();		
 	}
 	
 	@Override
@@ -51,13 +37,11 @@ public class MainActivity extends Activity {
 	final AnimationListener listener = new AnimationListener() {
 		
 		@Override
-		public void onAnimationStart(Animation animation) {
-			
+		public void onAnimationStart(Animation animation) {			
 		}
 		
 		@Override
-		public void onAnimationRepeat(Animation animation) {
-			
+		public void onAnimationRepeat(Animation animation) {			
 		}
 		
 		@Override
@@ -71,4 +55,19 @@ public class MainActivity extends Activity {
 		}
 	};
 	
+	private void initAnimation() {
+		ani_left = new TranslateAnimation((MyApplication.SCREEN_WIDTH - run_bg.getLayoutParams().width)/2,0,0,0);
+		ani_right = new TranslateAnimation(0,(MyApplication.SCREEN_WIDTH - run_bg.getLayoutParams().width)/2,0,0);
+		ani_left.setInterpolator(new AccelerateDecelerateInterpolator());
+		ani_left.setDuration(10000);
+		ani_left.setFillAfter(true);
+		ani_left.setFillEnabled(true);
+		ani_left.setAnimationListener(listener);
+		ani_right.setInterpolator(new AccelerateDecelerateInterpolator());
+		ani_right.setDuration(10000);
+		ani_right.setFillAfter(true);
+		ani_right.setFillEnabled(true);
+		ani_right.setAnimationListener(listener);
+		run_bg.startAnimation(ani_left);
+	}
 }
