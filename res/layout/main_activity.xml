@@ -13,5 +13,22 @@
             android:background="@drawable/default_homebg"
             android:scaleType="fitCenter"/>
     </LinearLayout>
+    <LinearLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:paddingTop="150.0dp">
+        <ca.laplanete.mobile.pageddragdropgrid.PagedDragDropGrid
+	        android:layout_width="fill_parent"
+	        android:layout_height="0.0dp"
+	        android:layout_weight="740"
+	        android:scrollbars="none" />
+        <LinearLayout 
+            android:layout_width="fill_parent"
+            android:layout_height="0.0dp"
+            android:layout_weight="260">
+            
+        </LinearLayout>
+    </LinearLayout>
 
 </RelativeLayout>
