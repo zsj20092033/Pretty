@@ -1,5 +1,7 @@
 package com.clock.pretty.activity;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import android.content.Context;
@@ -34,21 +36,59 @@ public final class HomePagedDragDropGridAdapter implements PagedDragDropGridAdap
 		init();
 	}
 	
+	private static List<PageGridItem> getItemsFromPageIndex(int pageIndex) {
+		if (pageIndex < page_list.size()) {
+			return page_list.get(pageIndex).getItems();
+		}
+		return Collections.emptyList();
+	}
+	
+	private static PageGridPage getPageFromIndex(int pageIndex) {
+		if (pageIndex < page_list.size()) {
+			return page_list.get(pageIndex);
+		}
+		return null;
+	}
+	
 	private static void init() {
-		List list;
+		List<PageGridItem> list;
 		int i;
+		if (PageGridPage.subedItems.size() == 0) {
+			list = PageGridPage.getSubscribedItems();
+		} else {
+			list = PageGridPage.mergeList();
+		}
+		i = list.size();
+		for (int j = 0; j < i / 6; j++) {
+			PageGridPage page = new PageGridPage();
+			List<PageGridItem> items = new ArrayList<PageGridItem>();
+			for (int k = 0; k < 6; k++) {
+				PageGridItem item = list.get(6*j+k);
+				items.add(item);
+			}
+			page.setItems(items);
+			page_list.add(page);
+		}
+		if (i % 6 != 0) {
+			PageGridPage page = new PageGridPage();
+			List<PageGridItem> items = new ArrayList<PageGridItem>();
+			for (int j = 0; j < i % 6; j++) {
+				PageGridItem item = list.get(i / 6 * 6 + j);
+				items.add(item);
+			}
+			page.setItems(items);
+			page_list.add(page);
+		}
 	}
 
 	@Override
 	public int pageCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		return page_list.size();
 	}
 
 	@Override
 	public int itemCountInPage(int page) {
-		// TODO Auto-generated method stub
-		return 0;
+		return page_list.get(page).getItems().size();
 	}
 
 	@Override
@@ -59,25 +99,21 @@ public final class HomePagedDragDropGridAdapter implements PagedDragDropGridAdap
 
 	@Override
 	public int rowCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		return AUTOMATIC;
 	}
 
 	@Override
 	public int columnCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		return AUTOMATIC;
 	}
 
 	@Override
 	public void printLayout() {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void swapItems(int pageIndex, int itemIndexA, int itemIndexB) {
-		// TODO Auto-generated method stub
 		
 	}
 

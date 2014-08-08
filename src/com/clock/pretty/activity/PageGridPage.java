@@ -42,10 +42,37 @@ public class PageGridPage {
 				item.setItemIndex(object.optInt("index"));
 				item.setIsSubscribed(object.optInt("sub_flag"));
 				allItems.add(item);
+				if (item.getIsSubscribed() > 0) {
+					subedItems.add(item);
+				}
 			}
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public static List<PageGridItem> getSubscribedItems() {
+		subedItems.clear();
+		Iterator<PageGridItem> iterator = allItems.iterator();
+		while (iterator.hasNext()) {
+			PageGridItem item = iterator.next();
+			subedItems.add(item);
+		}
+		return subedItems;
+	}
+	
+	public static List<PageGridItem> mergeList() {
+		Iterator<PageGridItem> iterator = allItems.iterator();
+		while (iterator.hasNext()) {
+			PageGridItem item = iterator.next();
+			if (item.getIsSubscribed() > 0 && !subedItems.contains(item)) {
+				item.setItemIndex(subedItems.size());
+				subedItems.add(item);
+			} else if (item.getIsSubscribed() <= 0 && subedItems.contains(item)) {
+				subedItems.remove(item);
+			}
+		}
+		return subedItems;
 	}
 	
 	private static String readDataFromAssets(Context context) {
