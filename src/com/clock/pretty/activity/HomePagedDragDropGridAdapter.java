@@ -114,19 +114,47 @@ public final class HomePagedDragDropGridAdapter implements PagedDragDropGridAdap
 
 	@Override
 	public void swapItems(int pageIndex, int itemIndexA, int itemIndexB) {
+		PageGridPage page = page_list.get(pageIndex);
+		if (page != null) {
+			page.swapItems(itemIndexA, itemIndexB);
+		}
 		
 	}
 
 	@Override
 	public void moveItemToPreviousPage(int pageIndex, int itemIndex) {
-		// TODO Auto-generated method stub
-		
+		int i = pageIndex - 1;
+		PageGridPage page1;
+		PageGridPage page2;
+		if (i >= 0) {
+			page1 = page_list.get(i);
+			page2 = page_list.get(pageIndex);
+			if ((page1 != null) && (page2 != null));
+		} else {
+			return;
+		}
+		PageGridItem item1 = page1.removeItem(page1.sizeOfItems() - 1);
+		PageGridItem item2 = page2.removeItem(itemIndex);
+		page1.addItem(item2);
+		page2.addItem(item1);
 	}
 
 	@Override
 	public void moveItemToNextPage(int pageIndex, int itemIndex) {
-		// TODO Auto-generated method stub
-		
+		int i = pageIndex + 1;
+		PageGridPage page1;
+		PageGridPage page2;
+		if (i < pageCount()) {
+			page1 = page_list.get(pageIndex);
+			page2 = page_list.get(i);
+			if (page1 != null && page2 != null);
+		} else {
+			return;
+		}
+		PageGridItem item1 = page1.removeItem(itemIndex);
+		PageGridItem item2 = page2.removeItem(0);
+		page1.addItem(item2);
+		page2.addItem(item1);		
 	}
 
 	@Override

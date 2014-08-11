@@ -114,4 +114,8 @@ public class PageGridPage {
 	public void deleteItem(int index) {
 		items.remove(index);
 	}
+	
+	public int sizeOfItems() {
+		return items.size();
+	}
 }
