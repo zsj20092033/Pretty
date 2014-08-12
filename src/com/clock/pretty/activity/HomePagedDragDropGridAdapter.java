@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import com.clock.pretty.R;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -93,7 +95,7 @@ public final class HomePagedDragDropGridAdapter implements PagedDragDropGridAdap
 
 	@Override
 	public View view(int page, int index) {
-		// TODO Auto-generated method stub
+		View view = inflater.inflate(R.layout.pagegrid_item, root)
 		return null;
 	}
 
@@ -159,37 +161,44 @@ public final class HomePagedDragDropGridAdapter implements PagedDragDropGridAdap
 
 	@Override
 	public void deleteItem(int pageIndex, int itemIndex) {
-		// TODO Auto-generated method stub
-		
+		PageGridPage page = page_list.get(pageIndex);
+		if (page == null) {
+			return;
+		}
+		page.deleteItem(itemIndex);
+		if (pageIndex == pageCount() - 1) {
+			return;
+		}
+		for (int i = pageIndex + 1; i < pageCount(); i++) {
+			PageGridPage temp1 = page_list.get(i);
+			PageGridPage temp2 = page_list.get(i-1);
+			PageGridItem item = temp1.removeItem(0);
+			temp2.addItem(item);
+		}
 	}
 
 	@Override
 	public int deleteDropZoneLocation() {
-		// TODO Auto-generated method stub
-		return 0;
+		return TOP;
 	}
 
 	@Override
 	public boolean showRemoveDropZone() {
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
 	public int getPageWidth(int page) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public Object getItemAt(int page, int index) {
-		// TODO Auto-generated method stub
-		return null;
+		return page_list.get(page).getItems().get(index);
 	}
 
 	@Override
 	public boolean disableZoomAnimationsOnChangePage() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
