@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:id="@+id/parent" android:background="@drawable/grid_blue" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <Button android:textColor="#ffffffff" android:id="@+id/close_btn" android:background="#ffff0000" android:visibility="invisible" android:layout_width="40.0dip" android:layout_height="40.0dip" android:text="X" />
+    <LinearLayout android:gravity="bottom|left|center" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <TextView android:textSize="20.0sp" android:textColor="#ffffffff" android:id="@+id/item_text" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="美女" />
+    </LinearLayout>
+</LinearLayout>

@@ -5,10 +5,13 @@ import java.util.Collections;
 import java.util.List;
 
 import com.clock.pretty.R;
+import com.clock.pretty.entity.HomeMenuPicture;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 import ca.laplanete.mobile.pageddragdropgrid.PagedDragDropGridAdapter;
 
 
@@ -95,8 +98,26 @@ public final class HomePagedDragDropGridAdapter implements PagedDragDropGridAdap
 
 	@Override
 	public View view(int page, int index) {
-		View view = inflater.inflate(R.layout.pagegrid_item, root)
-		return null;
+		View view = inflater.inflate(R.layout.pagegrid_item, null);
+		View parent = view.findViewById(R.id.parent);
+		Button closeBtn = (Button) view.findViewById(R.id.close_btn);
+		TextView tv = (TextView) view.findViewById(R.id.item_text);
+		if (closeBtn != null) {
+			closeBtn.setTag("btn");
+		}
+		PageGridItem item = (PageGridItem) getItemAt(page, index);
+		if (tv != null) {
+			tv.setText(item.getName());
+		}
+		view.setTag(item.getName());
+		if (parent != null) {
+			String str = item.getName();
+			if (!HomeMenuPicture.menu_pic.containsKey(str)) {
+				
+			}
+			parent.setBackgroundResource(HomeMenuPicture.menu_pic.get(str).intValue());
+		}
+		return view;
 	}
 
 	@Override

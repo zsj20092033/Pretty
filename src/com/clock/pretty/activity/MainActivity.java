@@ -1,23 +1,28 @@
 package com.clock.pretty.activity;
 
+import ca.laplanete.mobile.pageddragdropgrid.PagedDragDropGrid;
+
 import com.clock.pretty.R;
 import com.clock.pretty.application.MyApplication;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements OnClickListener{
 	
 	private static final String TAG = "MainActivity";
 	
 	private ImageView run_bg;
 	private Animation ani_left,ani_right;
+	private PagedDragDropGrid grid;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +30,15 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main_activity);
 		run_bg = (ImageView) findViewById(R.id.run_bg);
+		grid = (PagedDragDropGrid) findViewById(R.id.main_grid);
 		
+		if ((PageGridPage.allItems != null) && (PageGridPage.allItems.size() == 0)) {
+			PageGridPage.configToList(this);
+		}
+		HomePagedDragDropGridAdapter adapter = HomePagedDragDropGridAdapter.getInstance(this);
+		grid.setAdapter(adapter);
+		grid.setClickListener(this);
+		grid.setFocusable(false);
 		initAnimation();		
 	}
 	
@@ -69,5 +82,11 @@ public class MainActivity extends Activity {
 		ani_right.setFillEnabled(true);
 		ani_right.setAnimationListener(listener);
 		run_bg.startAnimation(ani_left);
+	}
+
+	@Override
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+		
 	}
 }
