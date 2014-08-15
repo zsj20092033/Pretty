@@ -111,6 +111,8 @@ public class PagedDragDropGrid extends HorizontalScrollView implements PagedCont
             grid.setBackgroundResource(xmlRes);
         }
         addView(grid);
+        setHorizontalFadingEdgeEnabled(false);
+        setSmoothScrollingEnabled(true);
     }
 
     private void setBackground(AttributeSet attrs) {

@@ -72,12 +72,12 @@ public class MainActivity extends Activity implements OnClickListener{
 		ani_left = new TranslateAnimation((MyApplication.SCREEN_WIDTH - run_bg.getLayoutParams().width)/2,0,0,0);
 		ani_right = new TranslateAnimation(0,(MyApplication.SCREEN_WIDTH - run_bg.getLayoutParams().width)/2,0,0);
 		ani_left.setInterpolator(new AccelerateDecelerateInterpolator());
-		ani_left.setDuration(10000);
+		ani_left.setDuration(40000);
 		ani_left.setFillAfter(true);
 		ani_left.setFillEnabled(true);
 		ani_left.setAnimationListener(listener);
 		ani_right.setInterpolator(new AccelerateDecelerateInterpolator());
-		ani_right.setDuration(10000);
+		ani_right.setDuration(40000);
 		ani_right.setFillAfter(true);
 		ani_right.setFillEnabled(true);
 		ani_right.setAnimationListener(listener);

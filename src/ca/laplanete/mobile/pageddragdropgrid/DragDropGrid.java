@@ -39,6 +39,7 @@ import android.graphics.Point;
 import android.graphics.Rect;
 import android.os.Handler;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.SparseIntArray;
 import android.util.TypedValue;
 import android.view.Display;
@@ -231,14 +232,15 @@ public class DragDropGrid extends ViewGroup implements OnTouchListener, OnLongCl
 			for (int item = 0; item < adapter.itemCountInPage(page); item++) {
 				View v = adapter.view(page, item);
                 v.setTag(adapter.getItemAt(page,item));
-				removeView(v); 
+				//removeView(v); 
 				addView(v);
-				if(v!=deleteZone){
+				/*if(v!=deleteZone){
 					views.add(v); 
-				}
+				}*/
+				views.add(v);
 			}
 		}
-		deleteZone.bringToFront();
+		//deleteZone.bringToFront();
 	}
 
     public void reloadViews() {
@@ -251,7 +253,7 @@ public class DragDropGrid extends ViewGroup implements OnTouchListener, OnLongCl
                 }
             }
         }
-        deleteZone.bringToFront();
+        //deleteZone.bringToFront();
     }
 
     public int indexOfItem(int page, int index) {
@@ -649,7 +651,8 @@ public class DragDropGrid extends ViewGroup implements OnTouchListener, OnLongCl
 
 		int rightEdgeXCoor = (currentPage*gridPageWidth) + gridPageWidth;
 		int distanceFromEdge = rightEdgeXCoor - x;
-		return (x > (rightEdgeXCoor - EGDE_DETECTION_MARGIN)) && (distanceFromEdge < EGDE_DETECTION_MARGIN);
+		//return (x > (rightEdgeXCoor - EGDE_DETECTION_MARGIN)) && (distanceFromEdge < EGDE_DETECTION_MARGIN);
+		return (distanceFromEdge < EGDE_DETECTION_MARGIN);
 	}
 
 	private void animateOnTheEdge() {
@@ -880,16 +883,16 @@ public class DragDropGrid extends ViewGroup implements OnTouchListener, OnLongCl
 		computeGridMatrixSize(widthSize, heightSize);
 		computeColumnsAndRowsSizes(widthSize, heightSize);
 
-		measureChild(deleteZone, MeasureSpec.makeMeasureSpec(gridPageWidth, MeasureSpec.EXACTLY), MeasureSpec.makeMeasureSpec((int)getPixelFromDip(40), MeasureSpec.EXACTLY));
+		//measureChild(deleteZone, MeasureSpec.makeMeasureSpec(gridPageWidth, MeasureSpec.EXACTLY), MeasureSpec.makeMeasureSpec((int)getPixelFromDip(40), MeasureSpec.EXACTLY));
 
 		setMeasuredDimension(widthSize * adapter.pageCount(), heightSize);
 	}
 
-	private float getPixelFromDip(int size) {
+	/*private float getPixelFromDip(int size) {
 		Resources r = getResources();
 		float px = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, size, r.getDisplayMetrics());
 		return px;
-	}
+	}*/
 
 	private void computeColumnsAndRowsSizes(int widthSize, int heightSize) {
 		columnWidthSize = widthSize / computedColumnCount;
@@ -973,6 +976,7 @@ public class DragDropGrid extends ViewGroup implements OnTouchListener, OnLongCl
 	@Override
 	protected void onLayout(boolean changed, int l, int t, int r, int b) {
         //If we don't have pages don't do layout
+		Log.i("tag", "l:"+l+"ºÍr:"+r);
         if(adapter.pageCount() == 0)
             return;
 
@@ -1006,7 +1010,7 @@ public class DragDropGrid extends ViewGroup implements OnTouchListener, OnLongCl
 
 	private void layoutAChild(int pageWidth, int page, int col, int row, int childIndex) {
 		int position = positionOfItem(page, childIndex);
-
+		Log.i("tag", "position:"+position);
 		View child = views.get(position);
 
 		int left = 0;

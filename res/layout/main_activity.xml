@@ -24,6 +24,7 @@
 
         <ca.laplanete.mobile.pageddragdropgrid.PagedDragDropGrid
             android:id="@+id/main_grid"
+            android:visibility="visible"
             android:layout_width="fill_parent"
             android:layout_height="0.0dp"
             android:layout_weight="740"

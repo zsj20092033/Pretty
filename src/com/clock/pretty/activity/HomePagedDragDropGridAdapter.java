@@ -64,6 +64,9 @@ public final class HomePagedDragDropGridAdapter implements PagedDragDropGridAdap
 			list = PageGridPage.mergeList();
 		}
 		i = list.size();
+		if (page_list == null) {
+			page_list = new ArrayList<PageGridPage>();
+		}
 		for (int j = 0; j < i / 6; j++) {
 			PageGridPage page = new PageGridPage();
 			List<PageGridItem> items = new ArrayList<PageGridItem>();
@@ -122,12 +125,12 @@ public final class HomePagedDragDropGridAdapter implements PagedDragDropGridAdap
 
 	@Override
 	public int rowCount() {
-		return AUTOMATIC;
+		return 3;
 	}
 
 	@Override
 	public int columnCount() {
-		return AUTOMATIC;
+		return 2;
 	}
 
 	@Override
