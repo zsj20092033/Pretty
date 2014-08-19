@@ -1023,6 +1023,7 @@ public class DragDropGrid extends ViewGroup implements OnTouchListener, OnLongCl
 			top = (row * rowHeightSize) + ((rowHeightSize - child.getMeasuredHeight()) / 2);
 		}
 		child.layout(left, top, left + child.getMeasuredWidth(), top + child.getMeasuredHeight());
+		child.findViewWithTag("tag_img_layout").layout(10, 10, child.getMeasuredWidth() - 10, child.getMeasuredHeight() - 10);
 	}
 
 	private boolean lastTouchOnEdge() {

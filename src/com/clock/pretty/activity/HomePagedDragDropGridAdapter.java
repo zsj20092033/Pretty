@@ -103,6 +103,7 @@ public final class HomePagedDragDropGridAdapter implements PagedDragDropGridAdap
 	public View view(int page, int index) {
 		View view = inflater.inflate(R.layout.pagegrid_item, null);
 		View parent = view.findViewById(R.id.parent);
+		parent.setTag("tag_img_layout");
 		Button closeBtn = (Button) view.findViewById(R.id.close_btn);
 		TextView tv = (TextView) view.findViewById(R.id.item_text);
 		if (closeBtn != null) {
