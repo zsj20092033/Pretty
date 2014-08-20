@@ -11,6 +11,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import ca.laplanete.mobile.pageddragdropgrid.PagedDragDropGridAdapter;
 
@@ -105,6 +106,7 @@ public final class HomePagedDragDropGridAdapter implements PagedDragDropGridAdap
 		View parent = view.findViewById(R.id.parent);
 		parent.setTag("tag_img_layout");
 		Button closeBtn = (Button) view.findViewById(R.id.close_btn);
+		ImageView iv = (ImageView) view.findViewById(R.id.item_bg);
 		TextView tv = (TextView) view.findViewById(R.id.item_text);
 		if (closeBtn != null) {
 			closeBtn.setTag("btn");
@@ -119,7 +121,8 @@ public final class HomePagedDragDropGridAdapter implements PagedDragDropGridAdap
 			if (!HomeMenuPicture.menu_pic.containsKey(str)) {
 				
 			}
-			parent.setBackgroundResource(HomeMenuPicture.menu_pic.get(str).intValue());
+			//parent.setBackgroundResource(HomeMenuPicture.menu_pic.get(str).intValue());
+			iv.setBackgroundResource(HomeMenuPicture.menu_pic.get(str).intValue());
 		}
 		return view;
 	}

@@ -24,16 +24,55 @@
 
         <ca.laplanete.mobile.pageddragdropgrid.PagedDragDropGrid
             android:id="@+id/main_grid"
-            android:visibility="visible"
             android:layout_width="fill_parent"
             android:layout_height="0.0dp"
             android:layout_weight="740"
-            android:scrollbars="none" />
+            android:scrollbars="none"
+            android:visibility="visible" />
 
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="0.0dp"
             android:layout_weight="260" >
+
+            <FrameLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" >
+
+                <LinearLayout
+                    android:id="@+id/page_dian"
+                    android:layout_width="fill_parent"
+                    android:layout_height="20.0dip"
+                    android:layout_marginRight="10.0dip"
+                    android:clickable="true"
+                    android:gravity="right|center"
+                    android:orientation="horizontal" />
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_gravity="bottom"
+                    android:layout_marginBottom="10.0dip"
+                    android:layout_marginRight="10.0dip"
+                    android:layout_marginTop="10.0dip"
+                    android:gravity="bottom|right|center"
+                    android:orientation="horizontal"
+                    android:visibility="visible" >
+
+                    <Button
+                        android:id="@+id/page_sub"
+                        android:layout_width="40.0dip"
+                        android:layout_height="40.0dip"
+                        android:background="@drawable/home_subscribe_selector" />
+
+                    <Button
+                        android:id="@+id/page_setting"
+                        android:layout_width="40.0dip"
+                        android:layout_height="40.0dip"
+                        android:layout_marginLeft="18.0dip"
+                        android:background="@drawable/home_setting_selector" />
+                </LinearLayout>
+            </FrameLayout>
         </LinearLayout>
     </LinearLayout>
 
