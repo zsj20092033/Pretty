@@ -32,6 +32,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import com.clock.pretty.application.MyApplication;
+
 import android.content.Context;
 import android.graphics.Point;
 import android.os.Handler;
@@ -622,10 +625,7 @@ public class DragDropGrid extends ViewGroup implements OnTouchListener, OnLongCl
 			if (view != null) {
 				removeView(view); 
 				addView(view);
-
-				/*if(view!=deleteZone){
-					views.add(view); 
-				}*/
+				views.add(view);
 			}
 		}
 
@@ -827,7 +827,7 @@ public class DragDropGrid extends ViewGroup implements OnTouchListener, OnLongCl
 			if (view != null){
 				removeView(view); 
 				addView(view);
-
+				views.add(view);
 				/*if(view!=deleteZone){
 					views.add(view); 
 				}*/
@@ -1004,8 +1004,12 @@ public class DragDropGrid extends ViewGroup implements OnTouchListener, OnLongCl
 
 	private void layoutAChild(int pageWidth, int page, int col, int row, int childIndex) {
 		int position = positionOfItem(page, childIndex);
-		Log.i("tag", "position:"+position);
-		View child = views.get(position);
+		Log.i("tag", "position:"+position+"size:"+views.size());
+		//View child = views.get(position);
+		View child = getChildAt(position);
+		
+		int i = (int)MyApplication.SCREEN_WIDTH / 7;
+		int j = (int)MyApplication.SCREEN_WIDTH * 3 / 7;
 
 		int left = 0;
 		int top = 0;
@@ -1013,11 +1017,15 @@ public class DragDropGrid extends ViewGroup implements OnTouchListener, OnLongCl
 			left = computePageEdgeXCoor(child);
 			top = lastTouchY - (child.getMeasuredHeight() / 2);
 		} else {
-			left = (page * pageWidth) + (col * columnWidthSize) + ((columnWidthSize - child.getMeasuredWidth()) / 2);
-			top = (row * rowHeightSize) + ((rowHeightSize - child.getMeasuredHeight()) / 2);
+			//left = (page * pageWidth) + (col * columnWidthSize) + ((columnWidthSize - child.getMeasuredWidth()) / 2);
+			left = i + pageWidth * page + col * j;
+			top = row * rowHeightSize;
 		}
-		child.layout(left, top, left + child.getMeasuredWidth(), top + child.getMeasuredHeight());
-		//child.findViewWithTag("tag_img_layout").layout(10, 10, child.getMeasuredWidth() - 10, child.getMeasuredHeight() - 10);
+		child.layout(left, top, left + j, top + this.rowHeightSize);
+		//child.findViewWithTag("btn").setVisibility(VISIBLE);
+		//child.findViewWithTag("btn").setVisibility(VISIBLE);
+		Log.i("TAG", child.findViewWithTag("layout")+""+child.getWidth()+child.getMeasuredWidth());
+		//(child.findViewWithTag("tag_img_layout")).layout(10, 10, child.getMeasuredWidth() - 10, child.getMeasuredHeight() - 10);
 	}
 
 	private boolean lastTouchOnEdge() {

@@ -8,6 +8,7 @@ import com.clock.pretty.application.MyApplication;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.AccelerateDecelerateInterpolator;
@@ -31,6 +32,12 @@ public class MainActivity extends Activity implements OnClickListener{
 		setContentView(R.layout.main_activity);
 		run_bg = (ImageView) findViewById(R.id.run_bg);
 		grid = (PagedDragDropGrid) findViewById(R.id.main_grid);
+		
+		View v = LayoutInflater.from(this).inflate(R.layout.pagegrid_item, null);
+		Log.i("Tag", v+"");
+		View v1 = v.findViewById(R.id.parent);
+		v1.setTag("layout");
+		Log.i("TAG", v1.findViewWithTag("layout")+"");
 		
 		if ((PageGridPage.allItems != null) && (PageGridPage.allItems.size() == 0)) {
 			PageGridPage.configToList(this);
